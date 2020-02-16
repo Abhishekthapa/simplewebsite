@@ -15,7 +15,7 @@
     	$username=$_POST['username'];
     	$password=$_POST['password'];
     	$password=password_hash($password, PASSWORD_DEFAULT);
-    	$query = "SELECT * FROM users where email='".$email."' or username='".$username."' ";
+    	$query = "SELECT * FROM users where email=:email or username='".$username."' ";
     //	$data = $connect->exec($query);
     	$stmt = $connect->prepare($query);
 		$stmt->bindParam(':email', $email);

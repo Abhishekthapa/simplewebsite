@@ -1,46 +1,40 @@
 <?php
 session_start();
-$message="";
 include ('connect.php');
  $conn = new PDO($dsn, $username, $password);
     // set the PDO error mode to exception
  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-/*if(isset($_POST['Login'])){
+if(isset($_POST['login'])){
 $username=$_POST['username'];
 $password=$_POST['password'];
-$usertype=$_POST['usertype'];
-$password_hash=password_hash($password, PASSWORD_DEFAULT);
+$usertype=$_POST['Usertype'];
 
-$stmt = $conn->prepare("SELECT * from users WHERE username=:username AND password=:password AND usertype=:usertype ");
+
+$stmt = $conn->prepare("SELECT * from users WHERE username=:username");
 $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':usertype', $usertype);
 $stmt->execute();
-$row_count = $stmt->rowCount();
-echo "". $row_count;
-if($row_count>0){
-if (password_verify($password, $password_hash)) {
-    $_SESSION["username"]=$username;
-    header("location: index.php");
-    echo "Correct";
+    //$stmt->bindParam(':password', $password);
+//    $stmt->bindParam(':usertype', $usertype);
+$user=$stmt->fetch();
+if ($stmt->rowCount() > 0){
+	if (password_verify($password, $user['password']) && ($user['Usertype']==$usertype)){
+		$_SESSION['username']=$username;
+		$_SESSION['usertype']=$usertype;
+		header("location:index.php");
+           }
+	else
+	echo "enter correct credentials";
 }
 }
-else {
-    echo "user: " . $username. "<br>";
-    echo "pass: " . $password_hash. "<br>";
-    echo "Wrong Username or Password";
-}
-}*/
 
-if(isset($_POST['Login'])){
+
+/*if(isset($_POST['Login'])){
  	$username=$_POST['username'];
  	$password=$_POST['password'];
  	$usertype=$_POST['usertype'];
- 	$password=password_hash($password, PASSWORD_DEFAULT);
  	$query = " SELECT * FROM users where username='".$username."' and password='".$password."' ";
  	$data =$conn->query($query) ;
  	$count=$data->rowCount();
- 	echo "string" .$count;
  	 if($count>0)
  	 {
  	 	$_SESSION["username"]=$_POST['username'];
@@ -48,9 +42,11 @@ if(isset($_POST['Login'])){
  	 }
  	 else
  	 {
- 	 	$message='wrong data';
+ 	 	echo 'wrong data';
+ 	 	session_destroy();
+ 	 	header("refresh:2 ; location:login.php");
  	 }
- 	}
+ 	}*/
  
 
 
@@ -96,13 +92,14 @@ if (empty($_POST["username"]))
 			<td>Password:<input type="password" name="password" placeholder="enter your password"></td>
 		</tr>
 		<tr>
-			<td>Select usertype:<select name="usertype">
+			<td>Select usertype:<select name="Usertype">
 				<option value="admin">admin</option>
 				<option value="user">user</option>
+				<option value="superadmin">superadmin</option>
 			</select></td>
 		</tr>
 		<tr>
-			<td><input type="submit" name="Login" value="Login"></td>
+			<td><input type="submit" name="login" value="Login"></td>
 
 		</tr>
 		<tr>

@@ -48,7 +48,7 @@ $conn = new PDO($dsn, $username, $password);
    if($stmt->execute())
    {
    $successMSG = "new record succesfully inserted ...";
-    header("refresh:2 ;destination.php"); // redirects image view page after 5 seconds.
+    header("refresh:2 ;destination.php"); // redirects image view page after 2 seconds.
    }
    else
    {

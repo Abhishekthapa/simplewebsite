@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +25,17 @@ session_start();
         <a class="nav-link" href="About_us.php">About us</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="login.php">login</a>
+        <?php
+        if (empty($_SESSION['username']) || empty($_SESSION['usertype'] )) {
+          ?>
+                  <li><a class="nav-link" href="login.php" >Login/Register</a></li>
+                  <?php 
+                } else {
+                    ?>
+                  <li><a class="nav-link" href="logout.php" >Logout</a></li>
+<<?php 
+                }
+                ?>
       </li>
     </ul>
   </div>
