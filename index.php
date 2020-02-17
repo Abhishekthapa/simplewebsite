@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,17 +28,27 @@
       </li>
        <li class="nav-item">
         <?php
-        if (empty($_SESSION['username']) || empty($_SESSION['usertype'] )) {
+        if (empty($_SESSION['username'])) {
           ?>
                   <li><a class="nav-link" href="login.php" >Login/Register</a></li>
                   <?php 
                 } else {
-                    ?>
-                  <li><a class="nav-link" href="logout.php" >Logout</a></li>
-<<?php 
-                }
+                    ?>    
+            <?php 
+              if ($_SESSION['usertype']=="admin") {?>
+                <li><a class="nav-link" href="verifypost.php" >Verify post</a></li>
+               <?php 
+              }
+              if ($_SESSION['usertype']=='superadmin') {?>
+                 <li><a class="nav-link" href="verifyadmin.php" >verify admin</a></li>
+                 <?php
+              }
+              
                 ?>
-      </li>
+                 <li><a class="nav-link" href="logout.php" >Logout <?php echo  $_SESSION['username'];?></a></li>
+               <?php }
+                ?>
+       </li>
     </ul>
   </div>
 </nav>

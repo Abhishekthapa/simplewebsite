@@ -28,8 +28,8 @@
    		 $sql = "INSERT INTO users (username, password, Email)
     	VALUES ('$username', '$password', '$email')";
     	$connect->exec($sql);
-    	echo "successful addition";
-    	header("location:index.php");
+    	echo "successful addition please login ";
+    	header("location:login.php");
     }
     
 
