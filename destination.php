@@ -23,7 +23,8 @@
 </nav>
 	
 	<?php
-include ('connect.php');
+	//db connection
+	include ('connect.php');
     $conn = new PDO($dsn, $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -34,10 +35,10 @@ include ('connect.php');
     echo "Connection failed: " . $e->getMessage();
     exit();
     }*/
-    
-   
-    foreach ($data as $row)
+    //displaying the db 
+  foreach ($data as $row)
     {
+    	if ($row['verification']=='verified') {
 	echo '<table class="Destinationstable">
 			<tr>
 				<th rowspan="9" width="150px" ></th><img runat="server" src="images/'.$row['photo'].'" width="100%" height="400px" >
@@ -65,6 +66,7 @@ include ('connect.php');
 			</tr>
 		</table>' ;
 	}
+}
 	?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

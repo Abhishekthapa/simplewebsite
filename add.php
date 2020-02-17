@@ -3,7 +3,7 @@ include('connect.php');
 $conn = new PDO($dsn, $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+//geting submitted data
     if (isset($_POST['add'])) {
     	$route=$_POST['route'];
     	$cost=$_POST['cost'];
@@ -11,7 +11,7 @@ $conn = new PDO($dsn, $username, $password);
     	$postedby=$_POST['postedby'];
     	$information=$_POST['information'];
     	$imgFile = $_FILES['image']['name'];
- 		$tmp_dir = $_FILES['image']['tmp_name'];
+ 		 $tmp_dir = $_FILES['image']['tmp_name'];
   		$imgSize = $_FILES['image']['size'];
 
   		
@@ -29,7 +29,9 @@ $conn = new PDO($dsn, $username, $password);
      	move_uploaded_file($tmp_dir,$upload_dir);
    }
    else{
-    $errMSG = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";  
+    $errMSG = "Sorry, only JPG, JPEG, PNG & GIF files are allowed."; 
+    echo  $errMSG . '<br> please re enter the data';
+
    }
   
   
@@ -47,7 +49,8 @@ $conn = new PDO($dsn, $username, $password);
    
    if($stmt->execute())
    {
-   $successMSG = "new record succesfully inserted ...";
+   $successMSG = "new record succesfully inserted waiting for admin approval...";
+   echo $successMSG;
     header("refresh:2 ;destination.php"); // redirects image view page after 2 seconds.
    }
    else

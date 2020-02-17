@@ -15,18 +15,18 @@ $usertype=$_POST['Usertype'];
 $stmt = $conn->prepare("SELECT * from users WHERE username=:username");
 $stmt->bindParam(':username', $username);
 $stmt->execute();
-    //$stmt->bindParam(':password', $password);
-//    $stmt->bindParam(':usertype', $usertype);
+   
 $user=$stmt->fetch();
 //verifying valid user
 if ($stmt->rowCount() > 0){
 	if (password_verify($password, $user['password']) && ($user['Usertype']==$usertype)){
 		$_SESSION['username']=$_POST['username'];
 		$_SESSION['usertype']=$_POST['Usertype'];
+		$_SESSION['User_id']=$user['User_id'];
 			header("location:index.php");
            }
 	else
-	echo "enter correct credentials";
+	echo "enter correct credentials or you might have been promoted to admin";
 }
 }
 

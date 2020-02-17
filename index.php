@@ -28,6 +28,7 @@ session_start();
       </li>
        <li class="nav-item">
         <?php
+        //checking which user
         if (empty($_SESSION['username'])) {
           ?>
                   <li><a class="nav-link" href="login.php" >Login/Register</a></li>
@@ -41,6 +42,10 @@ session_start();
               }
               if ($_SESSION['usertype']=='superadmin') {?>
                  <li><a class="nav-link" href="verifyadmin.php" >verify admin</a></li>
+                 <?php
+              }
+              if ($_SESSION['usertype']=='user') {?>
+                 <li><a class="nav-link" href="wantadmin.php" >want to be admin</a></li>
                  <?php
               }
               
