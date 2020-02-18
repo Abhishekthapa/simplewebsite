@@ -24,10 +24,14 @@ if ($stmt->rowCount() > 0){
 		$_SESSION['usertype']=$_POST['Usertype'];
 		$_SESSION['User_id']=$user['User_id'];
 			header("location:index.php");
-           }
-	else
-	echo "enter correct credentials or you might have been promoted to admin";
+			 }
+		else
+			echo "enter correct credentials or you might have been promoted to admin";
+          
+	
 }
+else
+	echo "enter correct credentials or you might have been promoted to admin";
 }
 
 ?>

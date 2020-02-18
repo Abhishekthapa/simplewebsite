@@ -9,7 +9,7 @@ include ('connect.php');
    
 if ( $data->rowCount()  == 0) {
 	echo $update;
-	header('refresh:2; index.php');
+	header('refresh:1; index.php');
 }
 else{
 	$query = "SELECT * FROM users where wantadmin='1' ";

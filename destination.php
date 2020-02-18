@@ -18,6 +18,9 @@
       <li class="nav-item active">
         <a class="nav-link" href="add.php">ADD SOME MORE CONTENT</a>
       </li>
+       <li class="nav-item active">
+        <a class="nav-link" href="index.php">BACK</a>
+      </li>
   </ul>
 </div>
 </nav>

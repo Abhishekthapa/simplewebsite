@@ -1,8 +1,6 @@
 <?php
 include ('validuser.php');
 ?>
-
-
 <!HTML DOCTYPE>
 <html>
 <head>

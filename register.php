@@ -12,13 +12,14 @@
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if(isset($_POST['register'])){
     	$email=$_POST['email'];
-    	$username=$_POST['username'];
+    	$username=htmlspecialchars($_POST['username']);
     	$password=$_POST['password'];
     	$password=password_hash($password, PASSWORD_DEFAULT);
-    	$query = "SELECT * FROM users where email=:email or username='".$username."' ";
+    	$query = "SELECT * FROM users where email=:email or username=:username ";
     //	$data = $connect->exec($query);
     	$stmt = $connect->prepare($query);
 		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':username', $username);
 		$stmt->execute();
 
 		if($stmt->rowCount() > 0)
@@ -51,7 +52,7 @@
 			<td>Password:<input type="password" name="password" placeholder="enter your password"></td>
 		</tr>
 		<tr>
-			<td><input type="submit" name="register" value="register"></td>
+			<td><input type="submit" name="register" ></td>
 		</tr>
 	</table>
 </form>
